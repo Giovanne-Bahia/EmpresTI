@@ -1,0 +1,11 @@
+.env
+.env.*
+.git
+.next
+node_modules
+aulas
+docs
+rules
+AGENTS.md
+**/*.test.ts
+**/*.test.tsx

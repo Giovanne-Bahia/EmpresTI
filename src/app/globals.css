@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --page: #05070f;
+  --color-bg: #080c1a;
+  --sidebar-bg: #060a16;
+  --color-surface: #0e1530;
+  --surface-sunken: #0b1128;
+  --color-text: #e6eaf6;
+  --text-muted: #8a93b2;
+  --text-dim: #7c86a2;
+  --text-faint: #5e6884;
+  --text-ghost: #454e68;
+  --border-frame: #222c4a;
+  --border-card: #1f2949;
+  --border-soft: #1a2340;
+  --border-row: #161d33;
+  --border-strong: #2b3450;
+  --accent-100: #eef2fe;
+  --accent-200: #d6e0fb;
+  --accent-300: #b4c6f6;
+  --accent-400: #8aa6ee;
+  --accent-500: #5b7fe0;
+  --accent-600: #3c5dbe;
+  --accent-700: #25408f;
+  --accent-800: #132663;
+  --accent-900: #001449;
+  --status-available-text: #5fd3aa;
+  --status-available-bg: rgba(63, 185, 140, 0.12);
+  --status-available-border: rgba(63, 185, 140, 0.35);
+  --status-borrowed-text: #9aa3bc;
+  --status-borrowed-bg: #1a2340;
+  --status-borrowed-border: #2b3450;
+  --status-maintenance-text: #e8b961;
+  --status-maintenance-bg: rgba(224, 163, 63, 0.12);
+  --status-maintenance-border: rgba(224, 163, 63, 0.35);
+  --status-overdue-text: #f0a0a5;
+  --status-overdue-label: #e08a90;
+  --status-overdue-bg: rgba(224, 91, 98, 0.05);
+  --status-overdue-border: rgba(224, 91, 98, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-open-sans), system-ui, sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: var(--accent-400);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-300);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-500);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
