@@ -3,6 +3,9 @@ import { Open_Sans } from 'next/font/google'
 import type { ReactNode } from 'react'
 
 import './globals.css'
+import { Providers } from './_components/providers'
+
+export const dynamic = 'force-dynamic'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -30,7 +33,9 @@ export default function RootLayout({
           href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }

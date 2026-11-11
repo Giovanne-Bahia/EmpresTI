@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .cursor/hooks/verification.mjs hook codex stop",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

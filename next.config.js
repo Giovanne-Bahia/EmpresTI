@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // A CSP usa nonce por requisição e é aplicada pelo src/proxy.ts.
   async headers() {
     return [
       {

@@ -2,12 +2,27 @@ import { fireEvent, render, screen, cleanup } from '@testing-library/react'
 import { afterEach, describe, expect, it } from 'vitest'
 
 import { CatalogDemo } from './catalog-demo'
+import { Providers } from '../_components/providers'
+
+const viewer = {
+  userId: 'test',
+  tenantId: 'test',
+  email: 'colaborador@example.test',
+  role: 'colaborador' as const,
+}
+function renderCatalog() {
+  return render(
+    <Providers>
+      <CatalogDemo viewer={viewer} />
+    </Providers>,
+  )
+}
 
 afterEach(cleanup)
 
 describe('catálogo demonstrativo', () => {
   it('CA-02: busca patrimônio e ignora acentos e caixa', () => {
-    render(<CatalogDemo />)
+    renderCatalog()
     const input = screen.getByRole('textbox', {
       name: 'Buscar equipamento ou patrimônio',
     })
@@ -23,7 +38,7 @@ describe('catálogo demonstrativo', () => {
   })
 
   it('CA-03: combina filtros, apresenta vazio e limpa o estado', () => {
-    render(<CatalogDemo />)
+    renderCatalog()
     fireEvent.click(screen.getByRole('button', { name: /^Câmeras$/ }))
     expect(screen.getAllByRole('article')).toHaveLength(1)
     fireEvent.click(screen.getByRole('checkbox', { name: 'Só disponíveis' }))
@@ -43,7 +58,7 @@ describe('catálogo demonstrativo', () => {
   })
 
   it('CA-04: identifica dados fictícios e não oferece gravações', () => {
-    render(<CatalogDemo />)
+    renderCatalog()
     expect(
       screen.getByText(
         'Demonstração com dados fictícios. Empréstimos não são registrados.',

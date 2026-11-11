@@ -1,0 +1,43 @@
+{
+  "spec": "docs/specs/dados-iniciais.md",
+  "verdict": "NAO_PRONTA",
+  "fingerprint": "62e2906f766dc0b55a37e12c2848725f3b96f89b5dca14d9bf65b11ef657e68d",
+  "completedAt": "2026-11-11T08:54:27.858Z",
+  "toolAudit": {
+    "calls": 44,
+    "filesRead": [
+      "AGENTS.md",
+      "checks.json",
+      "checks/build.log",
+      "checks/lint.log",
+      "checks/test-auth.log",
+      "checks/test-verifier.log",
+      "checks/test.log",
+      "checks/typecheck.log",
+      "docs/adr/001-stack.md",
+      "docs/ddl-pratica.md",
+      "docs/decisoes-pratica.md",
+      "docs/layout.md",
+      "docs/prd.md",
+      "docs/specs/README.md",
+      "docs/specs/catalogo.md",
+      "docs/specs/dados-iniciais.md",
+      "prisma/migrations/20261111015735_base_auth/migration.sql",
+      "prisma/migrations/20261111024139_auth_security/migration.sql",
+      "prisma/schema.prisma",
+      "prisma/seed.ts",
+      "rules/check.md",
+      "rules/migration.md",
+      "rules/operation.md",
+      "rules/restriction.md",
+      "src/app/catalogo/catalog-demo.test.tsx",
+      "src/app/page.test.tsx",
+      "src/app/routes.test.tsx",
+      "tests/e2e/auth.spec.ts",
+      "tests/integration/auth.test.ts",
+      "tests/integration/identity.test.ts",
+      "tests/verifier.test.mjs"
+    ]
+  },
+  "reportHash": "c57b08c4731d70cb5dc1a4d5559709a70e1ebe31d610d050f8f5a541f0ec3a87"
+}

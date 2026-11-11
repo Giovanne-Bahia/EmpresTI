@@ -2,8 +2,12 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { equipment, normalize } from './equipment'
+import { trpc, type RouterOutputs } from '../_components/providers'
+import { Button } from '../_components/ui'
 
 const categories = [
   'Todos',
@@ -24,7 +28,21 @@ function Icon({ name, className = '' }: { name: string; className?: string }) {
   return <i aria-hidden="true" className={`ph ph-${name} ${className}`} />
 }
 
-export function CatalogDemo() {
+export function CatalogDemo({
+  viewer,
+}: {
+  viewer: RouterOutputs['auth']['me']
+}) {
+  const router = useRouter()
+  const queryClient = useQueryClient()
+  const logout = trpc.auth.signOut.useMutation({
+    onError: () => router.refresh(),
+    onSuccess: () => {
+      queryClient.clear()
+      router.replace('/login')
+      router.refresh()
+    },
+  })
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('Todos')
   const [onlyAvailable, setOnlyAvailable] = useState(false)
@@ -131,13 +149,31 @@ export function CatalogDemo() {
             </div>
             <div className="flex items-center gap-[10px] rounded-[10px] border border-soft bg-sunken p-3">
               <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent-800 text-[11px] font-semibold text-accent-300">
-                DE
+                {viewer.email.slice(0, 2).toUpperCase()}
               </span>
-              <div className="flex flex-col gap-[3px]">
-                <p className="text-xs font-semibold">Colaborador de exemplo</p>
-                <p className="text-[11px] text-dim">Perfil de demonstração</p>
+              <div className="flex min-w-0 flex-col gap-[3px]">
+                <p
+                  title={viewer.email}
+                  className="truncate text-xs font-semibold"
+                >
+                  {viewer.email}
+                </p>
+                <p className="text-[11px] text-dim">
+                  {viewer.role === 'admin' ? 'Operações' : 'Colaborador'}
+                </p>
               </div>
             </div>
+            <Button
+              onClick={() => logout.mutate({})}
+              disabled={logout.isPending}
+            >
+              {logout.isPending ? 'Saindo…' : 'Sair'}
+            </Button>
+            {logout.error && (
+              <p role="alert" className="text-xs text-overdue">
+                Não foi possível sair. Tente novamente.
+              </p>
+            )}
           </div>
         </nav>
       </aside>

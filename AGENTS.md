@@ -55,7 +55,7 @@ Substitui planilha compartilhada. Sucesso = Operacoes abandona a planilha apos 2
 
 - Node 24 LTS (runtime suportado pelo deploy Vercel).
 - Gerenciador: `npm` (assuncao — se migrar p/ `pnpm`, atualizar esta secao e o CI).
-- Projeto Supabase em `sa-east-1` + projeto Vercel (deploy; dev local precisa so das envs).
+- Projeto Supabase em `us-west-2` (Oregon, EUA) + projeto Vercel (deploy; dev local precisa so das envs).
 
 ### 2.2 Setup inicial
 
@@ -103,7 +103,7 @@ Envs espelham `ADR-001 §5, §7, §9, §10` (ver `.env.example`):
   `prisma migrate deploy` → deploy Vercel.
 - Migration roda em **job do CI antes do deploy, nunca no boot** (serverless sobe N instancias em paralelo e migraria N vezes).
 - Vercel: **um projeto so**. Plano Hobby (vale so em contexto academico — se virar uso real, migrar para Pro antes).
-- Functions Hobby = EUA; banco em Sao Paulo = cada query paga travessia transatlantica. Aceitavel p/ demo, primeiro item a mudar em uso real.
+- Functions Hobby = EUA; banco em Oregon (`us-west-2`). A latencia entre as functions, o banco e os usuarios no Brasil deve ser reavaliada em uso real.
 - Limite 60s por request: operacao longa deve ser desenhada em lotes.
 
 ## 3. Arquitetura — onde mexer
@@ -136,7 +136,7 @@ prisma/
   seed.ts                            # idempotente, tenant suporte_ti
   migrations/
     ...                              # inclui RLS/policies/triggers em SQL bruto
-proxy.ts                             # renovacao de sessao @supabase/ssr em toda rota (Next 16+)
+src/proxy.ts                         # renovacao de sessao @supabase/ssr junto ao src/app (Next 16+)
 next.config.js                       # headers de seguranca + CSP
 ```
 

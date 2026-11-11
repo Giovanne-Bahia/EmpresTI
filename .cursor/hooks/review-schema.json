@@ -1,0 +1,61 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "spec",
+    "fingerprint",
+    "documentsRead",
+    "criteria",
+    "outOfScope",
+    "verdict"
+  ],
+  "properties": {
+    "spec": { "type": "string" },
+    "fingerprint": { "type": "string" },
+    "documentsRead": { "type": "array", "items": { "type": "string" } },
+    "criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ca", "status", "evidence", "notes"],
+        "properties": {
+          "ca": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ATENDIDO",
+              "REPROVADO",
+              "SEM_TESTE",
+              "AMBIGUO",
+              "PENDENTE_PRODUCAO"
+            ]
+          },
+          "notes": { "type": "string" },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["path", "line", "kind", "detail"],
+              "properties": {
+                "path": { "type": "string" },
+                "line": { "type": "integer" },
+                "kind": {
+                  "type": "string",
+                  "enum": ["test", "code", "log", "manual"]
+                },
+                "detail": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "outOfScope": { "type": "array", "items": { "type": "string" } },
+    "verdict": {
+      "type": "string",
+      "enum": ["PRONTA", "VALIDADA_LOCALMENTE", "NAO_PRONTA"]
+    }
+  }
+}

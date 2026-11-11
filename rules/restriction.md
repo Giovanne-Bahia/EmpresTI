@@ -26,6 +26,12 @@
 
 ## Ritmo
 
+### Exceção aprovada para a prática SDD de novembro de 2026
+
+Conforme `docs/decisoes-pratica.md`, o humano aprovou etapas completas com revisão
+entre etapas, em lugar de uma tarefa isolada por turno. A exceção não aprova specs,
+DDL ou migrations ainda não revisados e não autoriza Git, ADR ou produção.
+
 - Não escreva código antes de um plano aprovado. Escreva o plano, mostre,
   e espere.
 - "Pode implementar" NÃO autoriza o plano inteiro: execute UMA tarefa,

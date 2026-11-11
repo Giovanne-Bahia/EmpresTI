@@ -1,0 +1,14 @@
+
+ RUN  v4.1.11 C:/Users/giovannetorquato-ieg/OneDrive - Instituto J&F/Germinare/Terceiro Ano/Inovaçao e tecnologia/Vibe Coding/EmpresTI/.verification/limit-proof-1794392854059
+
+ ✓ tests/integration/loans.test.ts (4 tests) 3067ms
+     ✓ CA-SE-03/08: prazo de 336h, idempotência e auditoria atômica  754ms
+     ✓ CA-SE-04/07: concorrência da mesma pessoa preserva máximo de três  1113ms
+     ✓ CA-SE-07: disputa de item concede somente um empréstimo  330ms
+     ✓ CA-SE-05/06/09/10: manutenção e atraso bloqueiam; outro tenant não lê nem solicita  843ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  07:28:01
+   Duration  8.13s (transform 793ms, setup 0ms, import 2.33s, tests 3.07s, environment 0ms)
+

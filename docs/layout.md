@@ -404,3 +404,22 @@ Regras: nunca animar `box-shadow` de moldura; nada acima de 240ms; respeitar `@m
 - Conteúdo de exemplo: Marina Alves (Design, 2 itens), Rafael Lima (Eng), Camila Duarte (Mkt, atrasada), Tiago Menezes (Suporte, atrasado), Ana Sato (Financeiro), Bruno Kato (Eng), Helena Prado (Comercial, atrasada). Equipamentos: MacBook Pro 14" PAT-1042, ThinkPad T14 PAT-1188/1190, Dell UltraSharp 27" PAT-0871, LG UltraFine 24" PAT-0910, Sony A7 III PAT-0233, Dock USB-C Anker PAT-0455, Adaptador HDMI Belkin PAT-0338, Projetor Epson X49 PAT-0102, MacBook Air 13" M2 PAT-1204.
 - Tom de copy: **seco e operacional** — frases curtas, sem exclamação, sem emoji, sem "ops!". Datas no formato `dd/mmm` (`14/set`).
 - Idioma: português do Brasil.
+
+## 11. Adaptação aprovada para a prática SDD
+
+Decisões humanas registradas em decisoes-pratica.md; specs da etapa 2 aprovadas
+em 11/nov/2026. Esta seção descreve o alvo da implementação da prática.
+
+- Cards recebem fotos ilustrativas 4:3 de 800×600. Imagem não substitui nome,
+  categoria, patrimônio ou pill de situação. Crédito discreto Fotos: Pixabay com
+  link nas telas com fotos; detalhe informa Imagem ilustrativa.
+- Datas conservam dd/mmm e acrescentam às HH:mm, fuso America/Sao_Paulo, pois
+  vencem no horário da confirmação. Texto acessível inclui data completa e ano.
+- Equipamento emprestado exibe situação e prazo, sem nome/e-mail de outra pessoa.
+- Detalhe mostra somente dados conhecidos e Retirada no suporte de TI; omite
+  histórico, última devolução e especificações não fornecidas.
+- Meus empréstimos mostra apenas abertos; omite Devolver e tabela Histórico.
+- Manutenção permanece visível no catálogo geral, sempre indisponível para
+  solicitar; o filtro Só disponíveis a exclui. Dados iniciais: 9 disponíveis e 3
+  em manutenção. Contadores e segmentos passam a usar dados reais.
+- Mantêm-se dark-only, tokens, Open Sans, botões contornados e fluxo com diálogo.

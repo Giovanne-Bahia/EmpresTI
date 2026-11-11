@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum MembershipRole {
+  colaborador
+  admin
+
+  @@map("membership_role")
+}
+
+model Tenant {
+  id              String           @id @default(dbgenerated("gen_random_uuid()")) @map("tenant_id") @db.Uuid
+  slug            String           @unique
+  memberships     Membership[]
+  loginRateLimits LoginRateLimit[]
+  auditEvents     AuditEvent[]
+  equipment       Equipment[]
+  loans           Loan[]
+  loanRateLimits  LoanRateLimit[]
+
+  @@map("tenants")
+}
+
+model Membership {
+  tenantId String         @map("tenant_id") @db.Uuid
+  userId   String         @map("user_id") @db.Uuid
+  role     MembershipRole
+  tenant   Tenant         @relation(fields: [tenantId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  loans    Loan[]
+
+  @@id([tenantId, userId])
+  @@map("memberships")
+}
+
+model LoginRateLimit {
+  tenantId        String   @map("tenant_id") @db.Uuid
+  dimension       String
+  keyHash         Bytes    @map("key_hash")
+  windowStartedAt DateTime @map("window_started_at") @db.Timestamptz(6)
+  attempts        Int
+  tenant          Tenant   @relation(fields: [tenantId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([tenantId, dimension, keyHash])
+  @@map("login_rate_limits")
+}
+
+model AuditEvent {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId     String   @map("tenant_id") @db.Uuid
+  actorId      String   @map("actor_id") @db.Uuid
+  action       String
+  resourceType String   @map("resource_type")
+  resourceId   String   @map("resource_id") @db.Uuid
+  occurredAt   DateTime @default(now()) @map("occurred_at") @db.Timestamptz(6)
+  tenant       Tenant   @relation(fields: [tenantId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([tenantId, occurredAt], map: "audit_events_tenant_time_idx")
+  @@map("audit_events")
+}
+
+enum EquipmentCategory {
+  notebook
+  monitor
+  cabo
+  camera
+  @@map("equipment_category")
+}
+
+enum EquipmentCondition {
+  disponivel
+  manutencao
+  @@map("equipment_condition")
+}
+
+model Equipment {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId String @map("tenant_id") @db.Uuid
+  patrimonio String @unique @db.VarChar(40)
+  name String @db.VarChar(160)
+  category EquipmentCategory
+  condition EquipmentCondition @default(disponivel)
+  searchText String @map("search_text")
+  imagePath String @map("image_path")
+  imageProvider String @default("Pixabay") @map("image_provider")
+  imagePhotoId String @map("image_photo_id")
+  imageSourceUrl String @map("image_source_url")
+  imageAuthor String @map("image_author")
+  imageAuthorUrl String @map("image_author_url")
+  imageLicenseUrl String @map("image_license_url")
+  imageSha256 String @map("image_sha256") @db.Char(64)
+  imageWidth Int @default(800) @map("image_width")
+  imageHeight Int @default(600) @map("image_height")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  tenant Tenant @relation(fields:[tenantId],references:[id],onDelete:NoAction,onUpdate:NoAction)
+  loans Loan[]
+  @@unique([tenantId,id])
+  @@unique([tenantId,imagePhotoId],map:"equipment_tenant_photo_key")
+  @@unique([tenantId,imageSha256],map:"equipment_tenant_image_hash_key")
+  @@index([tenantId,patrimonio],map:"equipment_tenant_patrimonio_idx")
+  @@map("equipment")
+}
+
+model Loan {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId String @map("tenant_id") @db.Uuid
+  equipmentId String @map("equipment_id") @db.Uuid
+  userId String @map("user_id") @db.Uuid
+  requestId String @map("request_id") @db.Uuid
+  borrowedAt DateTime @default(now()) @map("borrowed_at") @db.Timestamptz(6)
+  dueAt DateTime @map("due_at") @db.Timestamptz(6)
+  returnedAt DateTime? @map("returned_at") @db.Timestamptz(6)
+  tenant Tenant @relation(fields:[tenantId],references:[id],onDelete:NoAction,onUpdate:NoAction)
+  equipment Equipment @relation(fields:[tenantId,equipmentId],references:[tenantId,id],onDelete:NoAction,onUpdate:NoAction)
+  membership Membership @relation(fields:[tenantId,userId],references:[tenantId,userId],onDelete:NoAction,onUpdate:NoAction)
+  @@unique([tenantId,userId,requestId],map:"loans_request_key")
+  @@map("loans")
+}
+
+model LoanRateLimit {
+  tenantId String @map("tenant_id") @db.Uuid
+  dimension String
+  keyHash Bytes @map("key_hash")
+  windowStartedAt DateTime @map("window_started_at") @db.Timestamptz(6)
+  attempts Int
+  tenant Tenant @relation(fields:[tenantId],references:[id],onDelete:NoAction,onUpdate:NoAction)
+  @@id([tenantId,dimension,keyHash])
+  @@map("loan_rate_limits")
+}

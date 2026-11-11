@@ -1,5 +1,10 @@
-import { ScreenPlaceholder } from '../../_components/screen-placeholder'
+import { EquipmentApp } from '../../_components/equipment-app'
 
-export default function EquipmentDetailsPage() {
-  return <ScreenPlaceholder label="03 Detalhe do item" />
+export default async function EquipmentDetailsPage({
+  params,
+}: {
+  params: Promise<{ patrimonio: string }>
+}) {
+  const { patrimonio } = await params
+  return <EquipmentApp mode="detail" patrimonio={patrimonio} />
 }

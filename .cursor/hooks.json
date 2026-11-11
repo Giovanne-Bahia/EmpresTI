@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "hooks": {
+    "afterAgentResponse": [
+      {
+        "command": "node .cursor/hooks/verification.mjs hook cursor response",
+        "timeout": 30,
+        "failClosed": true
+      }
+    ],
+    "stop": [
+      {
+        "command": "node .cursor/hooks/verification.mjs hook cursor stop",
+        "timeout": 30,
+        "failClosed": true,
+        "loop_limit": 1
+      }
+    ]
+  }
+}

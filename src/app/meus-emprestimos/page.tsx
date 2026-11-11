@@ -1,5 +1,5 @@
-import { ScreenPlaceholder } from '../_components/screen-placeholder'
+import { EquipmentApp } from '../_components/equipment-app'
 
 export default function MyLoansPage() {
-  return <ScreenPlaceholder label="04 Meus empréstimos" />
+  return <EquipmentApp mode="mine" />
 }
