@@ -3,6 +3,8 @@ import { createHash } from 'node:crypto'
 import sharp from 'sharp'
 const folder = 'docs/imagens-equipamentos'
 const manifest = JSON.parse(await readFile(`${folder}/manifest.json`, 'utf8'))
+if (manifest.some((row) => row.decision === 'approved'))
+  throw new Error('Lote aprovado: seleção bloqueada até nova revisão humana.')
 const replacements = [
   ['TI-0001', 'laptop-closed', 0],
   ['TI-0002', 'laptop-isolated', 5],

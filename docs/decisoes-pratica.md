@@ -66,6 +66,31 @@ pendentes, specs de Operações inexistentes ou operações de Git/produção.
 
 ## Evidências e honestidade
 
+### Fechamento visual do lote — 13/nov/2026, 08h37
+
+O humano estabeleceu limite de busca até 08h40, permitindo encerrar com pendências
+se necessário. As cinco substituições restantes foram encontradas antes desse
+limite e o humano aprovou explicitamente as 12 imagens finais. O manifesto vincula
+cada aprovação ao SHA256; os 12 JPEGs 800×600 têm photo_id e conteúdo distintos.
+As restrições visuais não foram relaxadas. O recorte 4:3 do monitor exclui um objeto
+com texto no primeiro plano e está documentado, sem desfoque ou geração de imagem.
+Upload e carga do inventário não foram executados nesta rodada.
+
+### Preparação condicional do reenvio — 13/nov/2026
+
+O humano conversará com o professor sobre eventual reenvio. Autorizou preparar
+os arquivos para uma entrega rápida caso aceita; não enviar, commitar, dar push,
+publicar ou mudar serviços nesta preparação. Corrigir localmente os dois P2 e
+incluir regressões preserva as decisões aprovadas, sem criar ADR ou nova feature.
+O roteiro está em reenvio.md e os pacotes registram data real e mudanças locais.
+
+Durante a tentativa anterior de publicação, o humano autorizou uma exceção
+operacional específica: restaurar a migration antiga ao SQL já aplicado e usar
+Prisma via sessão IPv4, fora do CI, para aplicar somente as duas migrations novas.
+A aplicação terminou com sucesso. Isso corrige a premissa anterior de que a
+migration antiga ainda não estava publicada. O deploy não foi concluído e essa
+exceção não é autorização permanente para mudanças remotas futuras.
+
 ### Prioridade da avaliação técnica
 
 O humano pediu concentrar a entrega nas decisões técnicas, aceitando limitações

@@ -6,12 +6,12 @@ import type { TenantRepository } from './tenant.repository'
 import { DomainError } from './domain-error'
 
 export function publicEquipment(
-  item: Equipment & { loans?: Array<{ dueAt: Date }> },
+  item: Equipment & { loans: Array<{ dueAt: Date }> },
 ) {
   const status =
     item.condition === 'manutencao'
       ? ('manutencao' as const)
-      : item.loans?.length
+      : item.loans.length
         ? ('emprestado' as const)
         : ('disponivel' as const)
   return {
@@ -23,7 +23,7 @@ export function publicEquipment(
     imageUrl: `${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/equipamentos/${item.imagePath.split('/').map(encodeURIComponent).join('/')}`,
     imageAuthor: item.imageAuthor,
     imageSourceUrl: item.imageSourceUrl,
-    dueAt: item.loans?.[0]?.dueAt ?? null,
+    dueAt: item.loans[0]?.dueAt ?? null,
   }
 }
 export async function listEquipment(

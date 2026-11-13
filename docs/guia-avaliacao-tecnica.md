@@ -210,7 +210,9 @@ locais, não com o inventário real ou a conta do professor. Consulte
 
 Pendências: fotos aprovadas, inventário real, provisionamento remoto, publicação,
 fechamento da revisão independente e commits específicos da prova deliberada.
-Uma revisão estática equivalente encontrou dois P2 ainda não corrigidos; consulte
+Uma revisão estática equivalente encontrou dois P2 em 11/nov. Foram corrigidos
+localmente na preparação de 13/nov, com regressões automatizadas e sem nova revisão
+independente. Consulte
 [o relatório](evidencias/revisao-independente.md) e
 [a prova local](evidencias/prova-limite.md). Cadastro/devolução em Operações
 fazem parte da v1 do PRD, mas estão fora da prática de solicitação e continuam sem

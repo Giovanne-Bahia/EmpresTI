@@ -5,7 +5,7 @@ foi usado um subagente geral separado, somente de leitura, com essa limitação
 informada ao humano. Não constitui execução do Bugbot nativo nem certificação
 final de todos os critérios de aceite.
 
-## Achados ainda não corrigidos
+## Achados da rodada original de 11/nov
 
 - **P2 — .cursor/hooks/verification-core.mjs:15 e :45:** impressão da fonte
   exclui .github/workflows e arquivos YAML. O revisor confirmou que sourceFiles()
@@ -26,3 +26,15 @@ não foram corrigidos nem ocultados para declarar aprovação da implementação
 
 Fotos, inventário real, provisionamento e publicação permanecem pendências
 conhecidas. A prova deliberada separada está em prova-limite.md.
+
+## Acompanhamento — 13/nov/2026
+
+Na preparação local de eventual reenvio, o agente principal incluiu workflows
+e extensões yml/yaml na impressão da fonte. Uma regressão confere alteração de
+fingerprint e rejeição de recibo obsoleto para ambas as extensões.
+
+As consultas de empréstimos passaram a carregar os empréstimos abertos do
+equipamento, e a projeção pública exige essa relação no tipo. A regressão em
+Postgres real confere solicitação, repetição, Meus empréstimos e detalhe com
+situação emprestado e prazo coincidente. Resultados da rodada estão em
+preparacao-reenvio.md. Correção e teste não equivalem a nova revisão independente.

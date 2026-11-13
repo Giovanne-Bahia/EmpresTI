@@ -1,5 +1,36 @@
 # EmpresTI — roteiro de entrega
 
+## Atualização de 13/nov — imagens e acesso do professor
+
+O humano informou aceite do reenvio. A conta do professor está confirmada, como
+colaborador em suporte_ti, sem empréstimos; a senha fornecida foi testada e a
+sessão temporária encerrada, sem gravar credenciais nos documentos.
+
+Às 08h37, o humano aprovou as 12 imagens finais, com hashes registrados no
+manifesto. Ver docs/imagens-equipamentos/TRIAGEM.md. O ZIP das fotos está em
+.verification/fotos-aprovadas-20261113/fotos-suporte_ti-083728.zip. Upload e carga
+do inventário foram concluídos pelo humano. Em 13/nov, às 08h57, a versão atual
+foi publicada na Vercel, deployment dpl_AwbwyLTpXZTsjJCzCuRxX5BfDvHP, READY,
+mantendo https://empresti.vercel.app/catalogo. Conferência por leitura confirmou
+12 equipamentos (9 disponíveis e 3 em manutenção), sem empréstimos.
+Ver docs/evidencias/publicacao-2026-11-13.md.
+Os estados anteriores abaixo devem ser lidos com essa atualização.
+
+## Candidato a reenvio — 13/nov/2026
+
+Reenvio ainda depende da resposta do professor. O roteiro atualizado está em
+[docs/reenvio.md](docs/reenvio.md); pacotes locais podem ser gerados por
+`preparar-reenvio.ps1`. Esta preparação não autoriza envio, push ou publicação.
+As correções locais dos dois P2 têm regressões automatizadas; o resultado desta
+rodada está em docs/evidencias/preparacao-reenvio.md: 41 testes, lint, typecheck,
+build e reset local aprovados. A revisão de
+11/nov permanece histórica, sem ser transformada em aprovação desta versão.
+
+Atualização operacional posterior ao commit: as duas migrations novas foram
+aplicadas em produção pelo Prisma com exceção explícita do humano, via sessão
+IPv4. A migration antiga local foi restaurada ao SQL original já publicado.
+O deploy não terminou e o envio dos arquivos precisa ser refeito após aceite.
+
 ## Leitura para avaliação das decisões
 
 A prioridade definida pelo humano é a avaliação das decisões técnicas. Comece
@@ -35,13 +66,13 @@ Fontes: `docs/decisoes-pratica.md`, `docs/ddl-pratica.md`,
 
 ## Pendências para a demonstração real
 
-1. Processar e aprovar as 12 fotografias distintas em JPEG 800×600, com manifesto
-   de origem e hash. A adoção de sharp 0.35.5 já foi registrada pelo humano no ADR-001.
+1. Fotografias concluídas e aprovadas pelo humano em 13/nov às 08h37; preservar
+   os hashes dos 12 JPEGs 800×600. Qualquer mudança exige nova revisão.
 2. Humano configurar o bucket equipamentos e publicar os arquivos aprovados.
-3. Concluir e validar o carregamento idempotente dos 12 itens; provisionar o
-   professor como colaborador, sem redefinir senha existente, com zero empréstimos.
+3. Concluir e validar o carregamento idempotente dos 12 itens. Conta e vínculo
+   de colaborador do professor já conferidos; zero empréstimos.
 4. Configurar CI e serviços de publicação; executar migration antes do deploy.
-5. Resolver os dois achados P2 da revisão independente equivalente e completar
+5. Validar as correções locais dos dois achados P2 e completar
    os commits específicos da prova deliberada. A prova em cópia local isolada
    já mostrou reprovação com quatro e aprovação ao restaurar três, sem editar teste.
    Publicação continua pendente.
@@ -82,7 +113,7 @@ existe somente no banco descartável e não integra o inventário de entrega.
 ## Arquivos preparados nesta rodada
 
 - `.cursor/skills/imagens-equipamentos/`: rotina Pixabay, cache, processamento e seleção.
-- `docs/imagens-equipamentos/manifest.json`: 12 candidatos e hashes, sem aprovação.
+- `docs/imagens-equipamentos/manifest.json`: 12 imagens e hashes aprovados em 13/nov às 08h37.
 - `docs/imagens-equipamentos/rejeicoes.json`: histórico da primeira triagem.
 - `prisma/seed-equipment.ts`: exige 12 aprovações vinculadas aos hashes, JPEG 800×600,
   fotos distintas e objetos públicos com bytes idênticos. Insere faltantes em
@@ -133,7 +164,8 @@ O lote de imagens ainda requer triagem/aprovação e eventuais substituições. 
 de inventário não foi executado com fotos reais aprovadas. Não houve publicação,
 provisionamento remoto ou fechamento da revisão independente. A prova deliberada
 foi executada em cópia local isolada; os dois commits específicos não foram feitos.
-Revisão independente equivalente encontrou dois achados P2 ainda não corrigidos;
+Revisão independente equivalente encontrou dois achados P2 em 11/nov; em 13/nov
+foram feitas correções locais com testes de regressão, sem nova revisão independente;
 ver docs/evidencias/revisao-independente.md e docs/evidencias/prova-limite.md.
 Cadastro/devolução operacionais não têm spec aprovada nem funcionalidade completa.
 O npm informou 22 vulnerabilidades no conjunto de dependências; não foi aplicado

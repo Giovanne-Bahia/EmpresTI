@@ -42,7 +42,7 @@ function bind(db: Prisma.TransactionClient, tenantId: string) {
     priorRequest: (userId: string, requestId: string) =>
       db.loan.findFirst({
         where: { tenantId, userId, requestId },
-        include: { equipment: true },
+        include: { equipment: { include: equipmentView } },
       }),
     loanCursor: (userId: string, id: string) =>
       db.loan.findFirst({
@@ -52,7 +52,7 @@ function bind(db: Prisma.TransactionClient, tenantId: string) {
     mine: (userId: string, take: number, cursor?: string) =>
       db.loan.findMany({
         where: { tenantId, userId, returnedAt: null },
-        include: { equipment: true },
+        include: { equipment: { include: equipmentView } },
         orderBy: { id: 'asc' },
         take,
         ...(cursor ? { cursor: { id: cursor }, skip: 1 } : {}),
@@ -74,7 +74,7 @@ function bind(db: Prisma.TransactionClient, tenantId: string) {
     }) =>
       db.loan.create({
         data: { ...data, tenantId },
-        include: { equipment: true },
+        include: { equipment: { include: equipmentView } },
       }),
     audit: (actorId: string, resourceId: string) =>
       db.auditEvent.create({

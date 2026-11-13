@@ -24,6 +24,7 @@ const roots = [
   '.codex/agents',
   '.agents/skills',
   '.cursor/skills',
+  '.github/workflows',
 ]
 const rootFiles = [
   'AGENTS.md',
@@ -42,7 +43,8 @@ const rootFiles = [
   '.cursor/hooks.json',
   '.codex/hooks.json',
 ]
-const extensions = /\.(?:md|ts|tsx|mts|mjs|js|json|toml|prisma|sql|png|jpe?g)$/i
+const extensions =
+  /\.(?:md|ts|tsx|mts|mjs|js|json|toml|ya?ml|prisma|sql|png|jpe?g)$/i
 
 export function safeFile(root, name) {
   if (

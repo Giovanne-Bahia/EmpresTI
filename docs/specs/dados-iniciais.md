@@ -1,8 +1,13 @@
 # Dados iniciais e imagens dos equipamentos
 
 Status: spec aprovada pelo humano em 11/nov/2026; schema e rotinas preparados.
-Lote visual não aprovado por decisão humana; inventário real e professor não
-provisionados. Critérios não encerrados. Ver ../../ENTREGA.md.
+Lote de 12 imagens finais aprovado explicitamente pelo humano em 13/nov/2026,
+às 08h37 de São Paulo, com hashes vinculados. Conta do professor e vínculo
+confirmados e senha testada em produção. Upload das imagens e carga do inventário
+foram concluídos pelo humano e conferidos por leitura: 12 equipamentos, 9
+disponíveis e 3 em manutenção, sem empréstimos. Aplicativo publicado em 13/nov,
+deployment dpl_AwbwyLTpXZTsjJCzCuRxX5BfDvHP, mantendo o domínio existente.
+Critérios não encerrados integralmente; ver ../evidencias/publicacao-2026-11-13.md.
 
 Referências: ../prd.md, ../adr/001-stack.md, ../decisoes-pratica.md,
 ../ddl-pratica.md, AGENTS.md e rules/migration.md na raiz.

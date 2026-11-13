@@ -14,7 +14,11 @@ decisoes-pratica.md. Prisma Migrate continua sendo o único dono do schema.
 Não editar as duas migrations existentes, salvo a exceção posterior autorizada
 explicitamente pelo humano: IF EXISTS na instrução sobre _prisma_migrations da
 migration local de autenticação, ainda sem commit, para o shadow database. A
-exceção não autoriza editar migration já publicada. Não alterar dados de tenants,
+exceção não autoriza editar migration já publicada. Na inspeção posterior de
+produção, confirmou-se que a versão original já havia sido aplicada; o humano
+autorizou restaurar o arquivo local ao SQL original e aplicar somente as duas
+novas migrations pelo Prisma. O IF EXISTS não permanece na migration antiga.
+Não alterar dados de tenants,
 memberships, login_rate_limits ou audit_events. Novas tabelas começam vazias;
 não há backfill. Seed é separado, idempotente e executado pelo humano em produção.
 O DDL abaixo é o alvo semântico: o Prisma gera o SQL estrutural e a mesma migration

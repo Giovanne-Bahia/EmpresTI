@@ -6,6 +6,16 @@ const cache = '.image-cache'
 const output = 'docs/imagens-equipamentos'
 await mkdir(cache, { recursive: true })
 await mkdir(output, { recursive: true })
+let priorManifest
+try {
+  priorManifest = JSON.parse(await readFile(`${output}/manifest.json`, 'utf8'))
+} catch (error) {
+  if (error.code !== 'ENOENT') throw error
+}
+if (priorManifest?.some((row) => row.decision === 'approved'))
+  throw new Error(
+    'Lote aprovado: preparação bloqueada até nova revisão humana.',
+  )
 const groups = [
   ['laptop computer', ['TI-0001', 'TI-0002', 'TI-0003', 'TI-0004']],
   ['computer monitor', ['TI-0005', 'TI-0006', 'TI-0007']],

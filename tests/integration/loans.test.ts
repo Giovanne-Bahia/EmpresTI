@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto'
 import { PrismaClient, type Equipment } from '@prisma/client'
 import { afterAll, describe, expect, it } from 'vitest'
 import { tenantRepository } from '@/server/services/tenant.repository'
+import { equipmentDetail } from '@/server/services/equipment.service'
 import {
   requestLoan,
   loanSummary,
@@ -61,6 +62,17 @@ describe('empréstimos em Postgres real', () => {
     const first = await f.borrow(0, f.users[0], requestId)
     const replay = await f.borrow(0, f.users[0], requestId)
     expect(replay.id).toBe(first.id)
+    const mine = await myLoans(f.repo, f.users[0], { limit: 24 })
+    const catalogItem = await equipmentDetail(f.repo, f.items[0].patrimonio)
+    for (const item of [
+      first.equipment,
+      replay.equipment,
+      mine.items[0].equipment,
+      catalogItem,
+    ]) {
+      expect(item.status).toBe('emprestado')
+      expect(item.dueAt).toEqual(first.dueAt)
+    }
     expect(first.dueAt.getTime() - first.borrowedAt.getTime()).toBe(
       336 * 3600000,
     )

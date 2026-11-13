@@ -112,6 +112,23 @@ test('fingerprint exclui env e inclui configuração do harness', (t) => {
   assert.notEqual(fingerprint(f.root).fingerprint, withHook)
 })
 
+test('alteração de workflow YAML invalida recibo e fingerprint', (t) => {
+  const f = fixture(t)
+  for (const extension of ['yml', 'yaml']) {
+    const path = `.github/workflows/checks.${extension}`
+    f.put(path, 'name: checks\njobs: {}\n')
+    f.refresh()
+    const before = fingerprint(f.root)
+    assert.ok(before.files.includes(path))
+    f.put(path, 'name: checks alterados\njobs: {}\n')
+    assert.notEqual(fingerprint(f.root).fingerprint, before.fingerprint)
+    assert.throws(
+      () => validateReport(f.root, spec, f.report, f.checks),
+      /desatualizada/,
+    )
+  }
+})
+
 test('gate rejeita log adulterado e veredito sem prova', (t) => {
   const f = fixture(t)
   f.report.criteria[0].evidence = []
